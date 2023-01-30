@@ -12,7 +12,6 @@ namespace TestYourself_API.Models
         public int? questionsAmount { get; set; }
         public string Image { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public double? Result { get; set; }
         public bool isPassed { get; set; }
         public bool CanBePassedAgain { get; set; } = false;
         public TestCategory TestCategory { get; set; }
