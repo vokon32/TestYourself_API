@@ -29,7 +29,10 @@ namespace TestYourself_API.Repository
         {
             return await _context.Tests.ToListAsync();
         }
-
+        public async Task<IEnumerable<Test>> GetTestByCountry(string country)
+        {
+            return await _context.Tests.Where(c => c.AppUser.State.Contains(country)).ToListAsync();
+        }
         public bool TestExist(int id)
         {
             return _context.Tests.Any(t => t.Id == id);

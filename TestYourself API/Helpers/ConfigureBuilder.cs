@@ -28,6 +28,8 @@ namespace TestYourself_API.Helper
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITestResultRepository, TestResultRepository>();
             builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
+            builder.Services.AddScoped<IHomeRepository, HomeRepository>();
+            builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {

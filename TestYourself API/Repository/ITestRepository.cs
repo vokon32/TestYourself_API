@@ -12,6 +12,7 @@ namespace TestYourself_API.Repository
         Task<ICollection<Test>> GetTestsAsync();
         Task<Test> GetTestAsync(int id);
         Task<Test> GetTestAsNoTrackingAsync(int id);
+        Task<IEnumerable<Test>> GetTestByCountry(string country);
         bool TestExist(int id);
         bool Add(Test test);
         bool Update(Test test);
