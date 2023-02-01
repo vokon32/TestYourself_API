@@ -11,7 +11,12 @@ namespace TestYourself_API.Repository
     {
         Task<ICollection<Test>> GetTestsAsync();
         Task<Test> GetTestAsync(int id);
+        Task<Test> GetTestAsNoTrackingAsync(int id);
         bool TestExist(int id);
+        bool Add(Test test);
+        bool Update(Test test);
+        bool Delete(Test test);
+        bool Save();
 
     }
 }
