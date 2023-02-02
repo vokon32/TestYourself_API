@@ -85,11 +85,10 @@ namespace TestYourself_API.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [Authorize]
-        public async Task<IActionResult> Create([FromForm] createTestDto testDto)
+        public async Task<IActionResult> Create([FromQuery]string curUserId, [FromForm] createTestDto testDto)
         {
             if (ModelState.IsValid)
             {
-                var curUserId = User.GetUserId();
                 var result = await _photoService.AddPhotoAsync(testDto.Image);
                 var test = new Test
                 {
@@ -106,7 +105,7 @@ namespace TestYourself_API.Controllers
             {
                 ModelState.AddModelError("", "Photo upload failed");
             }
-            return View(testDto);
+            return BadRequest(testDto);
         }
 
         [HttpGet("edit/{testId}")]
@@ -129,7 +128,7 @@ namespace TestYourself_API.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [Authorize]
-        public async Task<IActionResult> Edit(int testId, [FromForm] EditTestDto testVM)
+        public async Task<IActionResult> Edit(int testId, [FromQuery] string curUserId, [FromForm] EditTestDto testVM)
         {
             if (!ModelState.IsValid)
             {
@@ -149,7 +148,6 @@ namespace TestYourself_API.Controllers
                     return BadRequest(ModelState);
                 }
                 var photoResult = await _photoService.AddPhotoAsync(testVM.Image);
-                var curUserId = User.GetUserId();
                 var test = new Test
                 {
                     Id = testId,
@@ -161,7 +159,7 @@ namespace TestYourself_API.Controllers
                 };
                 _testRepository.Update(test);
 
-                return RedirectToAction("Index");
+                return Ok("Index");
             }
             else
             {
